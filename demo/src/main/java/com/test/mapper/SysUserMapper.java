@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface SysUserMapper extends MyMapper<SysUser> {
 
     List<SysUser> getAllList();

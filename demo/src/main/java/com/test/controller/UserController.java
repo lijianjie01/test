@@ -29,7 +29,7 @@ public class UserController {
     @Autowired
     private SysUserService sysUserService;
 
-    @RequestMapping(value = "/userInfo", method = RequestMethod.GET)
+    @RequestMapping(value = "/userInfoTest", method = RequestMethod.GET)
     @ApiOperation("测试是否能够请求接口")
     public ResultResponse userInfo() {
         User user = new User();

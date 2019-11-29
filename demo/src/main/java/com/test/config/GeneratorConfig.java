@@ -10,6 +10,9 @@ import org.mybatis.generator.config.Configuration;
 import org.mybatis.generator.config.xml.ConfigurationParser;
 import org.mybatis.generator.internal.DefaultShellCallback;
 
+/**
+ * 逆向生成工具
+ */
 public class GeneratorConfig {
 
     public void generator() throws Exception{
@@ -17,7 +20,7 @@ public class GeneratorConfig {
         List<String> warnings = new ArrayList<String>();
         boolean overwrite = true;
         //指定 逆向工程配置文件
-        File configFile = new File("generatorConfig.xml");
+        File configFile = new File("generatorConfig.xml"); // 还成自己的。其他的不动
         ConfigurationParser cp = new ConfigurationParser(warnings);
         Configuration config = cp.parseConfiguration(configFile);
         DefaultShellCallback callback = new DefaultShellCallback(overwrite);

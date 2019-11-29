@@ -28,4 +28,6 @@ public interface SysUserService {
      * @return
      */
     TableResultResponse getList(SysUserDto userDto);
+
+    SysUser selectByUserName(String username);
 }

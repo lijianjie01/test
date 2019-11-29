@@ -70,4 +70,15 @@ public class SysUserServiceImpl implements SysUserService {
         PageInfo<SysUser> pageInfo = new PageInfo<>(userList);
         return new TableResultResponse(pageInfo.getTotal(), pageInfo.getList());
     }
+
+    @Override
+    public SysUser selectByUserName(String username) {
+        SysUser user = new SysUser();
+        user.setUsername(username);
+        List<SysUser> userList = sysUserMapper.select(user);
+        if (userList != null && userList.size() > 0) {
+            return userList.get(0);
+        }
+        return null;
+    }
 }

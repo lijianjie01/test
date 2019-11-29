@@ -32,11 +32,21 @@
         <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-
-        <table tableName="sys_user" >
+        <table tableName="sys_user_role" >
 <!--            返回主键-->
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
-
+        <table tableName="sys_role_permission" >
+<!--            返回主键-->
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="sys_role" >
+<!--            返回主键-->
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="sys_permission" >
+<!--            返回主键-->
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
     </context>
 </generatorConfiguration>

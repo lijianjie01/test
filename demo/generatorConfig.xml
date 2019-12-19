@@ -8,12 +8,13 @@
         <property name="javaFileEncoding" value="UTF-8"/>
 <!--        <property name="useMapperCommentGenerator" value="false"/>-->
 
+
         <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+<!--            MyMapper所在的位置-->
             <property name="mappers" value="com.test.utils.mapper.MyMapper"/>
-<!--            <property name="beginningDelimiter" value="`"/>-->
-<!--            <property name="endingDelimiter" value="`"/>-->
         </plugin>
 
+<!--        数据库链接-->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
                         connectionURL="jdbc:mysql://localhost:3306/my_test_project"
                         userId="root"
@@ -33,18 +34,6 @@
         </javaClientGenerator>
 
         <table tableName="sys_user_role" >
-<!--            返回主键-->
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="sys_role_permission" >
-<!--            返回主键-->
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="sys_role" >
-<!--            返回主键-->
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="sys_permission" >
 <!--            返回主键-->
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>

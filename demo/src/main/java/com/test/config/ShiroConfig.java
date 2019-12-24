@@ -93,20 +93,19 @@ public class ShiroConfig {
     @Bean(name = "shiroFilter")
     public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
-        shiroFilter.setSecurityManager(securityManager);
+        shiroFilter.setSecurityManager(securityManager); // setSecurityManager 表示指定 SecurityManager
+        shiroFilter.setLoginUrl("/loginPage"); // setLoginUrl 表示指定登录页面
+        shiroFilter.setSuccessUrl("/successUrl"); // setSuccessUrl 表示指定登录成功页面
+        shiroFilter.setUnauthorizedUrl("/unauthorizedurl");
         //SecurityUtils.setSecurityManager(securityManager);
-//        Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-//
+        Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
 //        //配置不会被拦截的链接，顺序判断
 //        filterChainDefinitionMap.put("/", "anon");
-//        filterChainDefinitionMap.put("/static/js/**", "anon");
-//        filterChainDefinitionMap.put("/static/css/**", "anon");
-//        filterChainDefinitionMap.put("/static/fonts/**", "anon");
-//        filterChainDefinitionMap.put("/login/**", "anon");
-//        filterChainDefinitionMap.put("/corp/call_back/receive", "anon");
+        filterChainDefinitionMap.put("/login", "anon");
+        filterChainDefinitionMap.put("/**", "authc");
         //authc:所有url必须通过认证才能访问，anon:所有url都可以匿名访问
 //        filterChainDefinitionMap.put("/**", "corsAuthenticationFilter");
-//        shiroFilter.setFilterChainDefinitionMap(filterChainDefinitionMap);
+        shiroFilter.setFilterChainDefinitionMap(filterChainDefinitionMap);
         //自定义过滤器
 //        Map<String, Filter> filterMap = new LinkedHashMap<>();
 //        filterMap.put("corsAuthenticationFilter", corsAuthenticationFilter());

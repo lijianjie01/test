@@ -1,24 +1,41 @@
 package com.test.controller;
 
+import com.test.entity.User;
+import com.test.utils.ResultResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
 @RestController
 @Slf4j
-//@RequestMapping(value = "/")
+//@RequestMapping("/doLogin")
 public class LoginController {
 
-//    @RequestMapping(value = "/login", method = RequestMethod.GET)
-//    public Map<String, Object> login(Map map) {
-//        Subject subject = SecurityUtils.getSubject();
-//        UsernamePasswordToken token = new UsernamePasswordToken();
-//        subject.login(token);
-//    }
+    @PostMapping("/login")
+    public ResultResponse login(@RequestBody User user) {
+        try {
+            Subject subject = SecurityUtils.getSubject();
+            UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(), user.getPassword(), "1024");
+            subject.login(token);
+        } catch (AuthenticationException e) {
+            e.printStackTrace();
+            return ResultResponse.error(e.getMessage());
+        }
+        return ResultResponse.success();
+    }
+
+    @RequestMapping("/loginPage")
+    public String login() {
+        return "loginPage, please login!";
+    }
+
+    @GetMapping("/hello")
+    public String hello() {
+        return "hello";
+    }
 }

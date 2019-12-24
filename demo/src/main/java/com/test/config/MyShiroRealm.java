@@ -3,13 +3,12 @@ package com.test.config;
 import com.test.entity.SysUser;
 import com.test.service.SysUserService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -35,7 +34,7 @@ public class MyShiroRealm extends AuthorizingRealm {
         String username = (String)token.getPrincipal(); // return getUsername(); 用户名
         SysUser user = sysUserService.selectByUserName(username);
         if (user == null) {
-            return null;
+            throw new UnknownAccountException("账户不存在!");
         }
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(username, user.getPassword(), getName());
         return authenticationInfo;

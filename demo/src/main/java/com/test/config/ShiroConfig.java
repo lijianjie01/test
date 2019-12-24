@@ -91,26 +91,26 @@ public class ShiroConfig {
      * @return
      */
     @Bean(name = "shiroFilter")
-    public ShiroFilterFactoryBean getShiroFilterFactoryBean(SecurityManager securityManager) {
+    public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
         shiroFilter.setSecurityManager(securityManager);
         //SecurityUtils.setSecurityManager(securityManager);
-        Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-
-        //配置不会被拦截的链接，顺序判断
-        filterChainDefinitionMap.put("/", "anon");
-        filterChainDefinitionMap.put("/static/js/**", "anon");
-        filterChainDefinitionMap.put("/static/css/**", "anon");
-        filterChainDefinitionMap.put("/static/fonts/**", "anon");
-        filterChainDefinitionMap.put("/login/**", "anon");
-        filterChainDefinitionMap.put("/corp/call_back/receive", "anon");
+//        Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
+//
+//        //配置不会被拦截的链接，顺序判断
+//        filterChainDefinitionMap.put("/", "anon");
+//        filterChainDefinitionMap.put("/static/js/**", "anon");
+//        filterChainDefinitionMap.put("/static/css/**", "anon");
+//        filterChainDefinitionMap.put("/static/fonts/**", "anon");
+//        filterChainDefinitionMap.put("/login/**", "anon");
+//        filterChainDefinitionMap.put("/corp/call_back/receive", "anon");
         //authc:所有url必须通过认证才能访问，anon:所有url都可以匿名访问
-        filterChainDefinitionMap.put("/**", "corsAuthenticationFilter");
-        shiroFilter.setFilterChainDefinitionMap(filterChainDefinitionMap);
+//        filterChainDefinitionMap.put("/**", "corsAuthenticationFilter");
+//        shiroFilter.setFilterChainDefinitionMap(filterChainDefinitionMap);
         //自定义过滤器
-        Map<String, Filter> filterMap = new LinkedHashMap<>();
+//        Map<String, Filter> filterMap = new LinkedHashMap<>();
 //        filterMap.put("corsAuthenticationFilter", corsAuthenticationFilter());
-        shiroFilter.setFilters(filterMap);
+//        shiroFilter.setFilters(filterMap);
 
         return shiroFilter;
     }
@@ -126,18 +126,18 @@ public class ShiroConfig {
     /**
      * 开启Shiro的注解(如@RequiresRoles,@RequiresPermissions),需借助SpringAOP扫描使用Shiro注解的类,并在必要时进行安全逻辑验证 * 配置以下两个bean(DefaultAdvisorAutoProxyCreator(可选)和AuthorizationAttributeSourceAdvisor)即可实现此功能 * @return
      */
-    @Bean
-    @DependsOn({"lifecycleBeanPostProcessor"})
-    public DefaultAdvisorAutoProxyCreator advisorAutoProxyCreator() {
-        DefaultAdvisorAutoProxyCreator advisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();
-        advisorAutoProxyCreator.setProxyTargetClass(true);
-        return advisorAutoProxyCreator;
-    }
-
-    @Bean
-    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager) {
-        AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
-        authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
-        return authorizationAttributeSourceAdvisor;
-    }
+//    @Bean
+//    @DependsOn({"lifecycleBeanPostProcessor"})
+//    public DefaultAdvisorAutoProxyCreator advisorAutoProxyCreator() {
+//        DefaultAdvisorAutoProxyCreator advisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();
+//        advisorAutoProxyCreator.setProxyTargetClass(true);
+//        return advisorAutoProxyCreator;
+//    }
+//
+//    @Bean
+//    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager) {
+//        AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
+//        authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
+//        return authorizationAttributeSourceAdvisor;
+//    }
 }

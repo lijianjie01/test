@@ -1,6 +1,10 @@
 # Server 服务端配置
 server:
-  port: 8081
+  port: 8082
+  ssl:
+    key-store: classpath:javaboy.p12
+    key-alias: tomcathttps
+    key-store-password: 111111
 
 spring:
   devtools: # 热部署生效

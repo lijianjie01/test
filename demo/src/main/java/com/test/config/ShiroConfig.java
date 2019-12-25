@@ -102,6 +102,7 @@ public class ShiroConfig {
 //        //配置不会被拦截的链接，顺序判断
 //        filterChainDefinitionMap.put("/", "anon");
         filterChainDefinitionMap.put("/login", "anon");
+        filterChainDefinitionMap.put("/quartz/**", "anon");
         filterChainDefinitionMap.put("/**", "authc");
         //authc:所有url必须通过认证才能访问，anon:所有url都可以匿名访问
 //        filterChainDefinitionMap.put("/**", "corsAuthenticationFilter");

@@ -42,10 +42,10 @@ public class UserController {
                 .success(user);
     }
 
-    @PostMapping("/addUser")
-    @ApiOperation("添加用户接口")
-    public ResultResponse addUser(@RequestBody SysUser user) {
-        SysUser sysUser = sysUserService.addUser(user);
+    @PostMapping("/signUser")
+    @ApiOperation("注册用户接口")
+    public ResultResponse signUser(@RequestBody SysUser user) {
+        SysUser sysUser = sysUserService.signUser(user);
         return ResultResponse.success(sysUser);
     }
 

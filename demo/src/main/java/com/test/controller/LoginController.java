@@ -1,5 +1,6 @@
 package com.test.controller;
 
+import com.test.entity.SysUser;
 import com.test.entity.User;
 import com.test.utils.ResultResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -13,11 +14,11 @@ import java.util.Map;
 
 @RestController
 @Slf4j
-//@RequestMapping("/doLogin")
+@RequestMapping("/doLogin")
 public class LoginController {
 
     @PostMapping("/login")
-    public ResultResponse login(@RequestBody User user) {
+    public ResultResponse login(@RequestBody SysUser user) {
         try {
             Subject subject = SecurityUtils.getSubject();
             UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(), user.getPassword(), "1024");

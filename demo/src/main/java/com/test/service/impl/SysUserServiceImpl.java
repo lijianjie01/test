@@ -6,6 +6,7 @@ import com.test.dto.SysUserDto;
 import com.test.entity.SysUser;
 import com.test.mapper.SysUserMapper;
 import com.test.service.SysUserService;
+import com.test.utils.EncoderUtils;
 import com.test.utils.TableResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,9 +23,10 @@ public class SysUserServiceImpl implements SysUserService {
     private SysUserMapper sysUserMapper;
 
     @Override
-    public SysUser addUser(SysUser user) {
+    public SysUser signUser(SysUser user) {
         user.setIsDelete(0);
         user.setRegistTime(new Date());
+        user.setPassword(EncoderUtils.bCryptPasswordEncoder().encode(user.getPassword()));
         sysUserMapper.insertSelective(user);
         return user;
     }
@@ -74,7 +76,7 @@ public class SysUserServiceImpl implements SysUserService {
     @Override
     public SysUser selectByUserName(String username) {
         SysUser user = new SysUser();
-        user.setUsername(username);
+        user.setUserName(username);
         List<SysUser> userList = sysUserMapper.select(user);
         if (userList != null && userList.size() > 0) {
             return userList.get(0);

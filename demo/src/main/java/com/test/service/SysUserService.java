@@ -8,7 +8,7 @@ import com.test.utils.TableResultResponse;
 
 public interface SysUserService {
 
-    SysUser addUser(SysUser user);
+    SysUser signUser(SysUser user);
 
     /**
      * null == list || list.size() ==0

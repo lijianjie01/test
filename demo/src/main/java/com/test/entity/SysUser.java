@@ -21,7 +21,7 @@ public class SysUser {
      * 用户名，登录名
      */
     @ApiModelProperty(value = "用户名，登录名")
-    private String username;
+    private String userName;
 
     /**
      * 密码
@@ -33,7 +33,7 @@ public class SysUser {
      * 昵称
      */
     @ApiModelProperty(value = "昵称")
-    private String nickname;
+    private String nickName;
 
     /**
      * 年龄

@@ -4,6 +4,7 @@ import com.test.config.QuartzConfigration;
 import com.test.entity.QuartzDto;
 import com.test.service.QuartzTaskService;
 import com.test.utils.ResultResponse;
+import io.swagger.annotations.Api;
 import org.quartz.SchedulerException;
 import org.quartz.ee.jmx.jboss.QuartzService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import javax.annotation.Resource;
 
 @RestController
 @RequestMapping("/quartz")
+@Api(tags = "quartz定时任务接口")
 public class QuartzController {
 
     @Autowired

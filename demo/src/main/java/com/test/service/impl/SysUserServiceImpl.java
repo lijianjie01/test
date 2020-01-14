@@ -76,7 +76,7 @@ public class SysUserServiceImpl implements SysUserService {
     @Override
     public SysUser selectByUserName(String username) {
         SysUser user = new SysUser();
-        user.setUserName(username);
+        user.setUsername(username);
         List<SysUser> userList = sysUserMapper.select(user);
         if (userList != null && userList.size() > 0) {
             return userList.get(0);

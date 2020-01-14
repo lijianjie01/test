@@ -21,7 +21,7 @@ public class SysUser {
      * 用户名，登录名
      */
     @ApiModelProperty(value = "用户名，登录名")
-    private String userName;
+    private String username;
 
     /**
      * 密码

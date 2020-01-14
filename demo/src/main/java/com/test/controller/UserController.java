@@ -13,6 +13,7 @@ import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -24,7 +25,6 @@ import java.util.Map;
 public class UserController {
 
     private Logger logger = LoggerFactory.getLogger(UserController.class);
-
 
     @Autowired
     private SysUserService sysUserService;
@@ -78,5 +78,19 @@ public class UserController {
     public TableResultResponse getList(@RequestBody SysUserDto userDto) {
         return sysUserService.getList(userDto);
 //        return ResultResponse.success();
+    }
+
+    @PostMapping("/login")
+    public ResultResponse login(@RequestBody SysUser user) {
+        try {
+//            Subject subject = SecurityUtils.getSubject();
+//            UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(), user.getPassword(), "1024");
+//            subject.login(token);
+            sysUserService.selectByUserName(user.getUsername());
+        } catch (AuthenticationException e) {
+            e.printStackTrace();
+            return ResultResponse.error(e.getMessage());
+        }
+        return ResultResponse.success();
     }
 }

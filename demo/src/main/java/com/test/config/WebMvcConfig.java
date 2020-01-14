@@ -16,6 +16,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .allowedHeaders("*") //允许跨域访问的Headers内容
                 .allowedMethods("POST", "GET", "PUT", "OPTIONS", "DELETE") //允许跨域访问的方法，OPTIONS必须设置Shiro中用到
                 .allowedOrigins("*") // 允许跨域访问的ip及端口
-                .allowCredentials(true);
+                .allowCredentials(true); // 是否发送cookie
     }
 }

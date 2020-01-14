@@ -3,6 +3,7 @@ package com.test.config;
 
 import com.test.filter.JWTAuthenticationFilter;
 import com.test.filter.JWTLoginFilter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -13,23 +14,48 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.util.logging.Logger;
+
 @Configuration
 //@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
+@Slf4j
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    /**
+     * 需要放行的URL
+     */
+    private static final String[] AUTH_WHITELIST = {
+            // -- register url
+            "/login",
+            "/users/signup",
+            "/users/addTask",
+            "/doLogin/login",
+            // -- swagger ui
+            "/v2/api-docs",
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/configuration/ui",
+            "/configuration/security",
+            "/swagger-ui.html",
+            "/webjars/**"
+            // other public endpoints of your API may be appended to this array
+    };
 
     private UserDetailsService userDetailsService;
 
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public WebSecurityConfig(UserDetailsService userDetailsService, BCryptPasswordEncoder bCryptPasswordEncoder) {
+        log.info("WebSecurityConfig构造函数执行~~~~~~~~~~~~");
         this.userDetailsService = userDetailsService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        log.info("WebSecurityConfig的configure方法HttpSecurity执行~~~~~~~~~~~~");
         http.cors().and().csrf().disable().authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/user/signUser").permitAll()
+                .antMatchers(AUTH_WHITELIST).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JWTLoginFilter(authenticationManager()))
@@ -38,7 +64,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        log.info("WebSecurityConfig的configure方法AuthenticationManagerBuilder执行~~~~~~~~~~~~");
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
+        // 使用自定义登录身份认证组件
+//        auth.authenticationProvider(new JwtAuthenticationProvider(userDetailsService));
     }
 
 }

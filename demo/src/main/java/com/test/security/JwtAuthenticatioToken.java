@@ -2,6 +2,7 @@ package com.test.security;
 
 import java.util.Collection;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -10,6 +11,7 @@ import org.springframework.security.core.GrantedAuthority;
  * @author Louis
  * @date Jun 29, 2019
  */
+@Slf4j
 public class JwtAuthenticatioToken extends UsernamePasswordAuthenticationToken {
 
 	private static final long serialVersionUID = 1L;

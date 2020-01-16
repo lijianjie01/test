@@ -13,7 +13,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -82,5 +84,15 @@ public class SysUserServiceImpl implements SysUserService {
             return userList.get(0);
         }
         return null;
+    }
+
+    @Override
+    public Set<String> findPermissions(String username) {
+        Set<String> permissions = new HashSet<>();
+        permissions.add("sys:user:view");
+        permissions.add("sys:user:add");
+        permissions.add("sys:user:edit");
+        permissions.add("sys:user:delete");
+        return permissions;
     }
 }

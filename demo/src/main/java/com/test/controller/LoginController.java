@@ -3,6 +3,7 @@ package com.test.controller;
 import com.test.entity.SysUser;
 import com.test.security.JwtAuthenticatioToken;
 import com.test.service.SysUserService;
+import com.test.utils.EncoderUtils;
 import com.test.utils.ResultResponse;
 import com.test.utils.SecurityUtils;
 import io.swagger.annotations.Api;
@@ -12,20 +13,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @Api(tags = "登录相关接口")
 @Slf4j
-//@RequestMapping("/doLogin")
+@RequestMapping("/doLogin")
 public class LoginController {
 
     @Autowired
     private SysUserService sysUserService;
 
-//    @Autowired
-//    private AuthenticationManager authenticationManager;
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     @PostMapping("/login")
     public ResultResponse login(@RequestBody SysUser user, HttpServletRequest request) {
@@ -33,9 +33,9 @@ public class LoginController {
 //            Subject subject = SecurityUtils.getSubject();
 //            UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(), user.getPassword(), "1024");
 //            subject.login(token);
-//            JwtAuthenticatioToken token = SecurityUtils.login(request, user.getUsername(), user.getPassword(), authenticationManager);
-            sysUserService.selectByUserName(user.getUsername());
-            return ResultResponse.success();
+            JwtAuthenticatioToken token = SecurityUtils.login(request, user.getUsername(), user.getPassword(), authenticationManager);
+//            sysUserService.selectByUserName(user.getUsername());
+            return ResultResponse.success(token);
         } catch (AuthenticationException e) {
             e.printStackTrace();
             return ResultResponse.error(e.getMessage());

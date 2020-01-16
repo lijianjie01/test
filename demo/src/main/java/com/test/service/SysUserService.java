@@ -5,6 +5,8 @@ import com.test.entity.SysUser;
 
 import com.test.utils.TableResultResponse;
 
+import java.util.Set;
+
 
 public interface SysUserService {
 
@@ -30,4 +32,11 @@ public interface SysUserService {
     TableResultResponse getList(SysUserDto userDto);
 
     SysUser selectByUserName(String username);
+
+    /**
+     * 查找用户的菜单权限标识集合
+     * @param username
+     * @return
+     */
+    Set<String> findPermissions(String username);
 }

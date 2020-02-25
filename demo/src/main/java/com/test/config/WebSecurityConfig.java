@@ -35,6 +35,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String[] AUTH_WHITELIST = {
             // -- register url
             "/login",
+            "/book",
+            "/thymeleaf/**",
             "/users/signup",
             "/users/addTask",
             "/doLogin/login",

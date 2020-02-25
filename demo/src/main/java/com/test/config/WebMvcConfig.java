@@ -18,4 +18,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .allowedOrigins("*") // 允许跨域访问的ip及端口
                 .allowCredentials(true); // 是否发送cookie
     }
+
+
 }
